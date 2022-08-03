@@ -60,6 +60,13 @@ class AuthController extends Controller
         return response()->json(['message' => 'Account don set, No post boring memes ooo', 'status' => 'success']);
     }
 
+    // logout
+    public function logout(Request $request) {
+        $request->user()->tokens()->delete();
+        $response = ['message' => 'You have been successfully logged out!'];
+        return response($response, 200);
+    }
+
     /**
      * Display the specified resource.
      *
