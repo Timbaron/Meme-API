@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     $user = User::where('id', $request->user()->id)->withCount('memes')->first();
     return response()->json([
         'user'=>$user,
+        'memes' => $user['memes_count'],
         'status' => 'success',
     ], 200);
 
