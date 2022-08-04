@@ -33,7 +33,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 // get memes
-Route::get('memes', [MemeController::class, 'index']);
+Route::get('memes/clean', [MemeController::class, 'index']);
+Route::get('memes/dark', [MemeController::class, 'dark']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('meme/upload', [MemeController::class, 'store']);

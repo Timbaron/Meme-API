@@ -15,10 +15,21 @@ class MemeController extends Controller
      */
     public function index()
     {
-        $memes = Meme::with('owner')->get();
-        return response()->json($memes);
+        $memes = Meme::with('owner')->where('type','clean')->get();
+        return response()->json([
+            'memes' => $memes,
+            'status' => 'success',
+        ]);
     }
 
+    public function dark()
+    {
+        $memes = Meme::with('owner')->where('type', 'dark')->get();
+        return response()->json([
+            'memes' => $memes,
+            'status' => 'success',
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
