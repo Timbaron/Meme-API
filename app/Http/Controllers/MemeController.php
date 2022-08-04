@@ -42,7 +42,7 @@ class MemeController extends Controller
 
         $memes = [
             'user_id' => $user_id,
-            'meme_url' => config('app.url') . '/storage/memes/' . $fileNameToStore,
+            'meme_url' => config('app.url') . 'storage/memes/' . $fileNameToStore,
             'caption' => $request->caption,
             'type' => $request->type,
         ];
