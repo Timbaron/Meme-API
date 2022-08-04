@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MemeController;
+use App\Models\Meme;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +20,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = User::where('id', $request->user()->id)->withCount('memes')->first();
+    return response()->json([
+        'user'=>$user,
+        'status' => 'success',
+    ], 200);
+
 });
 
 // Register Routes for the API

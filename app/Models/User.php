@@ -43,6 +43,6 @@ class User extends Authenticatable
     ];
 
     public function memes() {
-        return $this->hasMany(Meme::class);
+        return $this->hasMany(Meme::class, 'user_id');
     }
 }
