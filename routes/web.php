@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Meme;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/meme/{id}', function ($id) {
+    $meme = Meme::findOrFail($id);
+    return view('meme', compact('meme'));
 });

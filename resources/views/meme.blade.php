@@ -409,13 +409,25 @@
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <h1 style="text-align:center; font-size:56px; color:#e2e8f0">Welcome Meme Store</h1>
-            <small class="flex items-center" style="text-align:center; font-size:56px; color:#e2e8f0">🤣 😂 🤣Take my sorrow away 🤣 😂 🤣</small>
+            <small class="flex items-center" style="text-align:center; font-size:56px; color:#e2e8f0">🤣 😂 🤣Take your sorrow away 🤣 😂 🤣</small>
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                 <img src="https://c.tenor.com/h7xHyShRg3kAAAAj/laugh-emoji.gif" alt="Lauging emoji">
             </div>
 
             <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <img src="{{$meme->meme_url}}" alt="Download" width="300px" height="300px">
+                            <div class="ml-4 text-lg leading-7 font-semibold">
+                                <a href="{{$meme->meme_url}}" Download>Click here to download</a>
+                            </div>
+                            <!-- <img src="https://c.tenor.com/SAqvzQ5lSyUAAAAi/download.gif" alt="Download" width="50px" height="50px"> -->
+                        </div>
+
+
+
+                    </div>
                     <div class="p-6">
                         <div class="flex items-center">
                             <img src="https://c.tenor.com/SAqvzQ5lSyUAAAAi/download.gif" alt="Download" width="50px" height="50px">
