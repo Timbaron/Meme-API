@@ -15,7 +15,7 @@ class MemeController extends Controller
      */
     public function index()
     {
-        $memes = Meme::with('owner')->where('type','clean')->get();
+        $memes = Meme::with('owner')->where('type','clean')->latest()->get();
         return response()->json([
             'memes' => $memes,
             'status' => 'success',
@@ -24,7 +24,7 @@ class MemeController extends Controller
 
     public function dark()
     {
-        $memes = Meme::with('owner')->where('type', 'dark')->get();
+        $memes = Meme::with('owner')->where('type', 'dark')->latest()->get();
         return response()->json([
             'memes' => $memes,
             'status' => 'success',
@@ -39,30 +39,46 @@ class MemeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'meme' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:500',
+            // 'meme' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:500',
+            'meme' => 'required|url',
             'type' => 'required|string',
         ]);
         if ($validator->fails()) {
             return response(['errors' => $validator->errors()->all()], 422);
         }
-        $user_id = auth()->id();
-        $images = $request->file('meme');
-        $name = time();
-        $extension = $images->getClientOriginalExtension();
-        $fileNameToStore = $name . '.' . $extension;
-
-        $memes = [
-            'user_id' => $user_id,
-            'meme_url' => config('app.url') . 'storage/memes/' . $fileNameToStore,
-            'caption' => $request->caption,
+        // check if url is a valid image
+        $headers = get_headers($request->meme);
+        if (strpos($headers[0], '200') === false) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid image url',
+            ]);
+        }
+        $meme = Meme::create([
+            'meme_url' => $request->meme,
             'type' => $request->type,
-        ];
-        $meme = Meme::create($memes);
-        $images->storeAs('public/memes', $fileNameToStore);
+            'user_id' => auth()->user()->id,
+            'caption' => $request->caption,
+        ]);
+        // $user_id = auth()->id();
+        // $images = $request->file('meme');
+        // $name = time();
+        // $extension = $images->getClientOriginalExtension();
+        // $fileNameToStore = $name . '.' . $extension;
+
+        // $memes = [
+        //     'user_id' => $user_id,
+        //     'meme_url' => config('app.url') . 'storage/memes/' . $fileNameToStore,
+        //     'caption' => $request->caption,
+        //     'type' => $request->type,
+        // ];
+        // $meme = Meme::create($memes);
+        // $images->storeAs('public/memes', $fileNameToStore);
 
         return response()->json([
             'message' => 'Meme uploaded successfully',
             'meme' => $meme,
+            'status' => 'success',
         ]);
 
 
