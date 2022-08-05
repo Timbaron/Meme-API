@@ -424,7 +424,7 @@
                         </div>
                         <div class="ml-12">
                             <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Download <a href="#">Now</a> and have access to thousands of memes all over the world, Both CLEAN and DARK memes
+                                Download <a href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40timbaron/meme-1d2c253c052c454082b68b96a496a26b-signed.apk" target="_blank">Now</a> and have access to thousands of memes all over the world, Both CLEAN and DARK memes
                             </div>
                         </div>
 
